@@ -1,0 +1,73 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MomMe - Childcare App</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&family=Pacifico&display=swap"
+      rel="stylesheet"
+    />
+    {% block head %}{% endblock %}
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo">
+          <a href="/dashboard">
+            <img src="{% static 'images/mom&baby.png' %}" alt="MomMe Logo" />
+          </a>
+          MomMe
+        </div>
+        <div class="header-right">
+          <div id="profileIcon" class="profile-container">
+            <a href="/profile">
+              <img src="{% static 'images/profile.png' %}" alt="Profile Icon" />
+            </a>
+          </div>
+          <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+          </button>
+        </div>
+      </div>
+      <nav class="nav-links" id="nav-links">
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/feedings">Feedings</a></li>
+          <li><a href="/medicines">Medicine</a></li>
+          <li><a href="">Diapers</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>{% block content %}{% endblock %}</main>
+     <script>
+      // JavaScript to toggle the navigation menu
+      function toggleMenu() {
+        var navMenu = document.getElementById("nav-links");
+        var menuBtn = document.getElementById("menuToggle");
+        var profileIcon = document.getElementById("profileIcon");
+
+        // If the nav menu is currently shown, hide it and revert the button
+        if (navMenu.style.display === "block") {
+          navMenu.style.display = "none";
+          // Restore hamburger icon (three bars)
+          menuBtn.innerHTML =
+            '<span class="bar"></span><span class="bar"></span><span class="bar"></span>';
+          // Show the cart icon
+          if (profileIcon) profileIcon.style.display = "block";
+        } else {
+          // Show the nav menu and change the button to an X
+          navMenu.style.display = "block";
+          menuBtn.innerHTML = "X";
+          // Hide the profile icon while the menu is displayed
+          if (profileIcon) profileIcon.style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>

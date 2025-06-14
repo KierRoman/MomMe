@@ -1,0 +1,19 @@
+body {
+    background-color: lightcoral;
+    z-index: 0;
+}
+
+.home-container {
+    margin: auto;
+    width: 90%;
+    max-width: 600px;
+    height: auto;
+    /* border: 2px solid red; */
+}
+
+.home-container img {
+    width: 100%;
+    height: auto;
+    max-height: 80vh;
+    overflow: hidden;
+}

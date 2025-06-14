@@ -1,0 +1,107 @@
+html, body {
+  background-color: salmon;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  background: linear-gradient(to bottom right, salmon)
+
+
+}
+body,
+main,
+.container,
+header,
+footer {
+  /* max-width: 90vw; */
+  margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    /* border: 2px solid red; */
+    background-color: rgba(34, 14, 113, 0.804);
+}
+
+.logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    color: palevioletred;
+}
+
+.logo img {
+    border: 2px solid red;
+    max-width: 100%;
+    height: auto;
+    min-height: 7.5vh;
+    max-height: 10vh;
+    border-radius: 50%;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: .75rem;
+    
+}
+
+/* ---------- Hamburger Menu Button ---------- */
+.hamburger-menu {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 10px;
+  font-size: 24px; /* Used when showing 'X';*/
+  color: palevioletred; /* Used when showing 'X';*/
+  justify-content: center;
+}
+.hamburger-menu .bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: palevioletred;
+  margin: 4px 0;
+  transition: all 0.3s;
+}
+
+.profile-container img {
+  width: 30px;
+  height: auto;
+}
+
+/* ---------- Navigation Menu Dropdown ---------- */
+.nav-links {
+  display: none; /* Hidden by default */
+  margin-left: 70%;
+  max-width: 500px;
+  background-color: #fff;
+  width: 30%;
+  position: absolute;
+  top: 6rem;
+  z-index: 999;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: palevioletred; 
+}
+
+.nav-links ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.nav-links ul li {
+  padding: 10px;
+  text-align: right;
+  cursor: pointer;
+  color: palevioletred;
+  /* margin-right: 50px; */
+}
+.nav-links ul li:hover {
+  background-color: rgba(34, 24, 133, 0.204);
+  transition: ease;
+}

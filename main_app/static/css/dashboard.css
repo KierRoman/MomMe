@@ -1,0 +1,81 @@
+main {
+  color:rgba(79, 2, 94)
+}
+.baby-summary {
+  background-color: rgba(231, 203, 209, 0.54);
+  padding: 1.5rem;
+  margin: 0 auto;
+  margin-bottom: 2rem;
+  border-radius: 12px;
+  /* box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  max-width: 90%;
+}
+
+#birthdate {
+  font-size: x-large;
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+  /* color:rgba(79, 2, 94) */
+}
+
+.baby-summary h3 {
+  grid-column: 1 / -1;
+  font-size: 30px;
+}
+
+.baby-summary p {
+  margin: 3.5rem 0;
+}
+
+
+.baby-summary-field {
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1rem;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 20px;
+  color: rgb(79, 2, 94);
+  box-shadow: 0 4px 10px rgba(79, 2, 94, 0.6);
+  border: 2px solid transparent;
+  transition: border 0.3s ease, color 0.3s ease;
+  /* text-align: center; */
+}
+
+.card-footer {
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.card-footer a {
+  color: rgb(79, 2, 94);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.baby-summary #feed-summary {
+  justify-content: space-between;
+}
+
+
+.baby-summary #med-summary {
+  background-position: bottom;
+  background-size: cover;
+}
+
+.baby-summary #appt-summary {
+  background-position: 60% center;
+}
+
+.baby-summary-field:hover {
+  border: 2px solid rgb(79, 2, 94)
+}

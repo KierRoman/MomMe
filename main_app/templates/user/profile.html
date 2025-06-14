@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+ <h3>My Babies</h3>
+{% for baby in request.user.babies.all %}
+  <div>
+    <h4>{{ baby.name }}</h4>
+    <p>Born: {{ baby.birth_date }}</p>
+    {% if baby.photo %}
+      <img src="{{ baby.photo.url }}" style="max-width: 100px; border-radius: 10px;">
+    {% endif %}
+  </div>
+{% empty %}
+  <p>No babies registered yet.</p>
+{% endfor %}
+{% endblock %}

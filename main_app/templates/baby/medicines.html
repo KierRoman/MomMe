@@ -1,0 +1,17 @@
+{% extends 'base.html' %} {% load static %}
+{% block content %}
+<div>
+{% for baby in babies %}
+  <h2>{{ baby.name }}</h2>
+  <p>Medicine:</p>
+  <ul>
+    {% for medicine in baby.medicine_set.all %}
+      <li>{{ medicine.dose_mg }}mg of {{ medicine.name }}</li>
+      <p>Taken at {{ medicine.time_given }}</p>
+      <p>Notes: {{medicine.notes}}</p>
+
+    {% endfor %}
+  </ul>
+{% endfor %}
+</div>
+{% endblock %}

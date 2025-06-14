@@ -1,0 +1,77 @@
+{% extends 'base.html' %} {% load static %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/dashboard.css' %}"
+/>
+{% endblock %}
+{% block content %}
+  <h2>Dashboard</h2>
+
+  {% for baby in babies %}
+    <div class="baby-summary">
+      <h3>{{ baby.name }}</h3>
+      <p id="birthdate"><strong>Birth Date:</strong> <br> {{ baby.birth_date|date:"F j, Y" }}</p>
+
+      <div class="baby-summary-field" id="feed-summary"
+      style="background-image: url('{% static "images/feeding.jpg" %}');">
+        <p><strong>🍼 Last Feeding:</strong>
+          <br>
+          {% if baby.latest_feeding %}
+            {{ baby.latest_feeding.time|date:"M j, H:i" }} - {{ baby.latest_feeding.type }}
+          {% else %}
+            No feedings yet.
+          {% endif %}
+        </p>
+
+        <div class="card-footer">
+          {% if baby.latest_feeding %}
+          <a href="">View Feedings →</a>
+          {% else %}
+          <a href="">Add a Feeding →</a>
+          {% endif %}
+        </div>
+
+      </div>
+
+      <div class="baby-summary-field" id="med-summary"
+      style="background-image: url('{% static "images/medical.jpg" %}');">
+        <p><strong>💊 Current Medicine:</strong>
+          <br>
+          {% if baby.current_medicine %}
+            {{ baby.current_medicine.name }} ({{ baby.current_medicine.dose_mg }}mg) @ {{ baby.current_medicine.time_given|date:"M j, H:i" }}
+          {% else %}
+            No medicine recorded.
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="baby-summary-field" id="appt-summary"
+      style="background-image: url('{% static "images/doctors.jpg" %}');">
+        <p><strong>🩺 Next Appointment:</strong>
+          <br>
+          {% if baby.next_appointment %}
+            w/ {{ baby.next_appointment.doctor_name }} on {{ baby.next_appointment.time|date:"M j, H:i" }}
+          {% else %}
+            No upcoming appointments.
+          {% endif %}
+        </p>
+      </div>
+
+      <div class="baby-summary-field" id="diaper-summary"
+      style="background-image: url('{% static "images/babydiaper.jpg" %}');">
+        <p><strong>🧷 Last Diaper Change:</strong>
+          <br>
+          {% if baby.latest_diaper %}
+            {{ baby.latest_diaper.time|date:"M j, H:i" }} - {{ baby.latest_diaper.type }}
+          {% else %}
+            No diaper changes recorded.
+          {% endif %}
+        </p>
+      </div>
+    </div>
+    {% comment %} <hr> {% endcomment %}
+  {% empty %}
+    <p>You haven’t added any babies yet.</p>
+  {% endfor %}
+{% endblock %}

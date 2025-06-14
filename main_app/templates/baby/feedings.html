@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div>
+  {% for baby in babies %}
+  <h2>{{baby.name}}</h2>
+  <p>Feedings:</p>
+  <ul>
+    {% for feeding in baby.feeding_set.all %}
+    <li>{{ feeding.time }} - {{ feeding.type }}</li>
+    {% endfor %}
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}

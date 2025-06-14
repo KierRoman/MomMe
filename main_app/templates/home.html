@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/home.css' %}"
+/>
+{% endblock %} {% block content %}
+
+<section class="logo-container">
+  <div class="home-container">
+    {% comment %} <img
+      src="{% static 'images/cutedog.png' %}"
+      alt="The Dog Collector Dog"
+    /> {% endcomment %}
+    <img
+    src="{% static 'images/mom&baby.png' %}"
+    alt=""
+    />
+</div>
+</section>
+{% endblock %}
