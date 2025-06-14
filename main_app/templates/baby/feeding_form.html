@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+{% endblock %}
+
+{% block content %}
+  <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Feeding for {{ baby.name }}</h2>
+
+  <form method="post" class="feeding-form">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn-submit">Save</button>
+  </form>
+
+  <a href="{% url 'feedings' baby.id %}" class="back-link">⬅ Back to Feedings</a>
+{% endblock %}

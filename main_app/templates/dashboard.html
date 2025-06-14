@@ -23,12 +23,12 @@
             No feedings yet.
           {% endif %}
         </p>
-
+        
         <div class="card-footer">
           {% if baby.latest_feeding %}
-          <a href="">View Feedings →</a>
+          <a href="{% url 'feedings' baby.id %}">Feedings for {{ baby.name }} →</a>
           {% else %}
-          <a href="">Add a Feeding →</a>
+          <a href="{% url 'feedings' baby.id %}">Add a Feeding →</a>
           {% endif %}
         </div>
 

@@ -1,13 +1,36 @@
-{% extends 'base.html' %} {% load static %} {% block content %}
-<div>
-  {% for baby in babies %}
-  <h2>{{baby.name}}</h2>
-  <p>Feedings:</p>
+{% extends 'base.html' %}
+{% block content %}
+
+{% if baby %}
+  <h2>{{ baby.name }}'s Feedings</h2>
+  <a href="{% url 'add_feeding' baby.id %}">➕ Add Feeding</a>
   <ul>
-    {% for feeding in baby.feeding_set.all %}
-    <li>{{ feeding.time }} - {{ feeding.type }}</li>
+    {% for feeding in feedings %}
+      <li>
+        {{ feeding.time|date:"Y-m-d H:i" }} - {{ feeding.type }} 
+        {% if feeding.amount_ml %}({{ feeding.amount_ml }} ml){% endif %}
+        &nbsp; <a href="{% url 'edit_feeding' feeding.id %}">✏️ Edit</a>
+      </li>
+    {% empty %}
+      <li>No feedings recorded yet.</li>
     {% endfor %}
   </ul>
+
+{% elif babies %}
+  {% for baby in babies %}
+    <h2>{{ baby.name }}</h2>
+    <ul>
+      {% if baby.latest_feeding %}
+        <li>{{ baby.latest_feeding.time|date:"Y-m-d H:i" }} - {{ baby.latest_feeding.type }}</li>
+      {% else %}
+        <li>No feedings yet.</li>
+      {% endif %}
+    </ul>
+    <a href="{% url 'feedings' baby.id %}">🔍 View All Feedings</a>
   {% endfor %}
-</div>
+
+{% else %}
+  <p>No babies found.</p>
+{% endif %}
+
 {% endblock %}

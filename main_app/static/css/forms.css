@@ -1,0 +1,93 @@
+main {
+  color:rgba(79, 2, 94)
+}
+
+h2 {
+  font-family: 'Pacifico', cursive;
+}
+
+.feeding-form {
+  max-width: 400px;
+  margin: 1.5em auto;
+  background: #c24e4e;
+  padding: 2em;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.feeding-form p {
+  margin-bottom: 1.2em;
+}
+
+.feeding-form input[type="text"],
+.feeding-form input[type="datetime-local"],
+.feeding-form input[type="number"],
+.feeding-form select,
+.feeding-form textarea {
+  width: 80%;
+  padding: 0.6em 0.8em;
+  border: 1.5px solid #91033a;
+  border-radius: 8px;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.07);
+  transition: border-color 0.5s ease, box-shadow 0.5s ease;
+  font-size: 1em;
+  background-color: rgba(102, 8, 8, 0.07);
+}
+
+.feeding-form input[type="text"]:focus,
+.feeding-form input[type="datetime-local"]:focus,
+.feeding-form input[type="number"]:focus,
+.feeding-form select:focus,
+.feeding-form textarea:focus {
+  border-color: #440362;
+  box-shadow: 0 0 6px rgba(36, 1, 71, 0.868);
+  outline: none;
+}
+
+.feeding-form input[type="text"]:hover,
+.feeding-form input[type="datetime-local"]:hover,
+.feeding-form input[type="number"]:hover,
+.feeding-form select:hover,
+.feeding-form textarea:hover {
+  border-color: #440362;
+  box-shadow: 0 0 6px rgba(36, 1, 71, 0.868);
+}
+
+.btn-submit {
+  display: block;
+  width: 100%;
+  padding: 0.75em 0;
+  margin-top: 1.5em;
+  background-color: #440362;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  font-weight: 600;
+  font-size: 1.1em;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.5);
+  transition: background-color 0.3s ease;
+}
+
+.btn-submit:hover {
+  background-color: #c20346;
+}
+
+.back-link {
+  display: inline-block;
+  margin: 1.5em auto;
+  color: #960b27;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1em;
+}
+
+.back-link:hover {
+  text-decoration: underline;
+}
+
+
+select {
+  background-color: rgba(102, 8, 8, 0.07);
+}
