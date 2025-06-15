@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+{% if baby %}
+  <h2>{{ baby.name }}'s Appointments</h2>
+  <a href="{% url 'add_appointment' baby.id %}">➕ Add Appointment</a>
+  <ul>
+    {% for appointment in appointments %}
+      <li>
+        {{ appointment.time|date:"Y-m-d H:i" }} — 
+        Appointment with Dr. {{ appointment.doctor_name }} at {{ appointment.location }}
+        {% if appointment.reason %}
+          <br><strong>Reason:</strong> {{ appointment.reason }}
+        {% endif %}
+        {% if appointment.notes %}
+          <br><strong>Notes:</strong> {{ appointment.notes }}
+        {% endif %}
+        <br>
+        <a href="{% url 'edit_appointment' appointment.id %}">✏️ Edit</a>
+      </li>
+    {% empty %}
+      <li>No appointments recorded yet.</li>
+    {% endfor %}
+  </ul>
+
+{% elif babies %}
+  {% for baby in babies %}
+    <h2>{{ baby.name }}</h2>
+    <ul>
+      {% if baby.next_appointment %}
+        <li>
+          {{ baby.next_appointment.time|date:"Y-m-d H:i" }} — Dr. {{ baby.next_appointment.doctor_name }} at {{ baby.next_appointment.location }}
+        </li>
+      {% else %}
+        <li>No appointments yet.</li>
+      {% endif %}
+    </ul>
+    <a href="{% url 'appointments' baby.id %}">🔍 View All Appointments</a>
+  {% endfor %}
+
+{% else %}
+  <p>No babies found.</p>
+{% endif %}
+
+{% endblock %}

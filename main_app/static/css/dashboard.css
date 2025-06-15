@@ -1,8 +1,10 @@
 main {
-  color:rgba(79, 2, 94)
+  color:rgba(34, 14, 113);
+  text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
 }
 .baby-summary {
-  background-color: rgba(231, 203, 209, 0.54);
+  background: linear-gradient(to bottom right, rgb(238, 130, 130) 0%, rgb(56, 4, 119) 100%);
+  /* background-color: rgba(231, 203, 209, 0.54); */
   padding: 1.5rem;
   margin: 0 auto;
   margin-bottom: 2rem;
@@ -34,6 +36,8 @@ h2 {
 
 .baby-summary p {
   margin: 3.5rem 0;
+  color:rgba(34, 14, 113);
+  text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
 }
 
 
@@ -47,12 +51,34 @@ h2 {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  border: 2px solid rgba(56, 4, 119, .65);
   border-radius: 20px;
-  color: rgb(79, 2, 94);
+  color: rgb(34, 14, 113);
+  text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
   box-shadow: 0 4px 10px rgba(79, 2, 94, 0.6);
-  border: 2px solid transparent;
   transition: border 0.3s ease, color 0.3s ease;
-  /* text-align: center; */
+  margin-bottom: 1.5em;
+  overflow: hidden;
+  position: relative;
+}
+
+.baby-summary-field::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.35);
+  z-index: 0;
+}
+
+.baby-summary-field p,
+.baby-summary-field .card-footer,
+.baby-summary-field h3,
+.baby-summary-field a {
+  position: relative;
+  z-index: 1;
 }
 
 .card-footer {
@@ -61,14 +87,14 @@ h2 {
 }
 
 .card-footer a {
-  color: rgb(79, 2, 94);
+  color: rgb(34, 14, 113);
   text-decoration: none;
   font-weight: bold;
 }
 
-.baby-summary #feed-summary {
-  justify-content: space-between;
-}
+/* .baby-summary #feed-summary {
+  background-position: right;
+} */
 
 
 .baby-summary #med-summary {
@@ -81,5 +107,6 @@ h2 {
 }
 
 .baby-summary-field:hover {
-  border: 2px solid rgb(79, 2, 94)
+  border: 2px solid rgb(79, 2, 94);
+  transform: scale(1.02);
 }

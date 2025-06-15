@@ -1,17 +1,47 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link
+  rel="stylesheet"
+  href="{% static 'css/display.css' %}"
+/>
+{% endblock %}
 {% block content %}
-<div>
-{% for baby in babies %}
-  <h2>{{ baby.name }}</h2>
-  <p>Medicine:</p>
-  <ul>
-    {% for medicine in baby.medicine_set.all %}
-      <li>{{ medicine.dose_mg }}mg of {{ medicine.name }}</li>
-      <p>Taken at {{ medicine.time_given }}</p>
-      <p>Notes: {{medicine.notes}}</p>
 
-    {% endfor %}
-  </ul>
-{% endfor %}
+<div class='med-card'>
+  {% if baby %}
+    <h2>{{ baby.name }}'s Medicines</h2>
+    <a href="{% url 'add_medicine' baby.id %}">➕ Add Medicine</a>
+    <ul>
+      {% for medicine in medicine %}
+        <li>
+          {{ medicine.time_given|date:"Y-m-d H:i" }} - {{ medicine.type }}
+          {% if medicine.dose_mg %}({{ medicine.dose_mg }} ml){% endif %}
+          &nbsp; <a href="{% url 'edit_medicine' medicine.id %}">✏️ Edit</a>
+        </li>
+      {% empty %}
+        <li>No medicines recorded yet.</li>
+      {% endfor %}
+    </ul>
 </div>
+
+<div class='med-card'>
+  {% elif babies %}
+    {% for baby in babies %}
+      <h2>{{ baby.name }}</h2>
+      <ul>
+        {% if baby.latest_medicine %}
+          <li>{{ baby.latest_medicine.time_given|date:"Y-m-d H:i" }} - {{ baby.latest_medicine.name }}</li>
+        {% else %}
+          <li>No medicines yet.</li>
+        {% endif %}
+      </ul>
+      <a href="{% url 'medicines' baby.id %}">🔍 View All medicines</a>
+    {% endfor %}
+  
+  {% else %}
+    <p>No babies found.</p>
+  {% endif %}
+</div>
+
 {% endblock %}

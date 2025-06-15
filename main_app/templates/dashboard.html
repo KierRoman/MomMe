@@ -44,6 +44,15 @@
             No medicine recorded.
           {% endif %}
         </p>
+        
+        <div class="card-footer">
+          {% if baby.current_medicine %}
+          <a href="{% url 'medicines' baby.id %}">Medicine for {{ baby.name }} →</a>
+          {% else %}
+          <a href="{% url 'medicines' baby.id %}">Add a Medicine →</a>
+          {% endif %}
+        </div>
+
       </div>
 
       <div class="baby-summary-field" id="appt-summary"
@@ -56,6 +65,15 @@
             No upcoming appointments.
           {% endif %}
         </p>
+
+        <div class="card-footer">
+          {% if baby.next_appointment %}
+          <a href="{% url 'appointments' baby.id %}">Appointments for {{ baby.name }} →</a>
+          {% else %}
+          <a href="{% url 'appointments' baby.id %}">Add an Appointment →</a>
+          {% endif %}
+        </div>
+
       </div>
 
       <div class="baby-summary-field" id="diaper-summary"

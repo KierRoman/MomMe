@@ -1,30 +1,87 @@
 main {
-  color:rgba(79, 2, 94)
+  color:rgba(34, 14, 113);
+  text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
 }
 
 h2 {
   font-family: 'Pacifico', cursive;
 }
 
-.feeding-form {
+.feeding-form,
+.profile-form,
+.medicine-form {
   max-width: 400px;
   margin: 1.5em auto;
-  background: #c24e4e;
+  background: linear-gradient(to bottom right, rgb(238, 130, 130) 0%, rgb(56, 4, 119) 120%);
   padding: 2em;
   border-radius: 12px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 24px rgba(57, 6, 99, 0.1);
+  overflow-x: hidden;
+  box-sizing: border-box;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.feeding-form p {
+.edit-bar img {
+  width: 24px;
+  height: 24px;
+  margin-left: -28px;
+  margin-top: -32px;
+  background: rgba(56, 4, 119, .38);
+  border-radius: 50%;
+  padding: 3px;
+  /* border: 1px solid rgb(56, 4, 119); */
+  box-shadow: 0 0 9px rgba(238, 130, 130, .7);
+  transition: transform 0.2s ease;
+}
+.edit-bar img:hover {
+  transform: scale(1.1);
+}
+
+.feeding-form *,
+.medicine-form *,
+.profile-form * {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.feeding-form p,
+.medicine-form p,
+.profile-form p {
   margin-bottom: 1.2em;
 }
+
+.edit-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.edit-bar a {
+  font-size: larger;
+  margin-right: 1rem;
+}
+
 
 .feeding-form input[type="text"],
 .feeding-form input[type="datetime-local"],
 .feeding-form input[type="number"],
 .feeding-form select,
-.feeding-form textarea {
+.feeding-form textarea,
+.feeding-form input[type="file"],
+
+.medicine-form input[type="text"],
+.medicine-form input[type="datetime-local"],
+.medicine-form input[type="number"],
+.medicine-form select,
+.medicine-form textarea,
+.medicine-form input[type="file"],
+
+.profile-form input[type="text"],
+.profile-form input[type="datetime-local"],
+.profile-form input[type="number"],
+.profile-form select,
+.profile-form textarea,
+.profile-form input[type="file"] {
   width: 80%;
   padding: 0.6em 0.8em;
   border: 1.5px solid #91033a;
@@ -33,28 +90,43 @@ h2 {
   transition: border-color 0.5s ease, box-shadow 0.5s ease;
   font-size: 1em;
   background-color: rgba(102, 8, 8, 0.07);
+  color:rgba(79, 2, 94);
 }
 
-.feeding-form input[type="text"]:focus,
-.feeding-form input[type="datetime-local"]:focus,
-.feeding-form input[type="number"]:focus,
+.feeding-form input:focus,
 .feeding-form select:focus,
-.feeding-form textarea:focus {
+.feeding-form textarea:focus,
+
+.medicine-form input:focus,
+.medicine-form select:focus,
+.medicine-form textarea:focus,
+
+.profile-form input:focus,
+.profile-form select:focus,
+.profile-form textarea:focus {
   border-color: #440362;
   box-shadow: 0 0 6px rgba(36, 1, 71, 0.868);
   outline: none;
 }
 
-.feeding-form input[type="text"]:hover,
-.feeding-form input[type="datetime-local"]:hover,
-.feeding-form input[type="number"]:hover,
+.feeding-form input:hover,
 .feeding-form select:hover,
-.feeding-form textarea:hover {
+.feeding-form textarea:hover,
+
+.medicine-form input:hover,
+.medicine-form select:hover,
+.medicine-form textarea:hover,
+
+.profile-form input:hover,
+.profile-form select:hover,
+.profile-form textarea:hover {
   border-color: #440362;
   box-shadow: 0 0 6px rgba(36, 1, 71, 0.868);
 }
 
-.btn-submit {
+.profile-form button[type="submit"],
+.medicine-form button[type="submit"],
+.feeding-form .btn-submit {
   display: block;
   width: 100%;
   padding: 0.75em 0;
@@ -66,11 +138,13 @@ h2 {
   font-weight: 600;
   font-size: 1.1em;
   cursor: pointer;
-  box-shadow: 0 4px 12px rgba(74, 144, 226, 0.5);
+  box-shadow: 0 4px 12px rgba(238, 144, 226, 0.5);
   transition: background-color 0.3s ease;
 }
 
-.btn-submit:hover {
+.profile-form button[type="submit"]:hover,
+.medicine-form button[type="submit"]:hover,
+.feeding-form .btn-submit:hover {
   background-color: #c20346;
 }
 

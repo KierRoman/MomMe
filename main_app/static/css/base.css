@@ -3,7 +3,7 @@ html, body {
   height: 100%;
   padding: 0;
   margin: 0;
-  background: linear-gradient(to bottom right, salmon)
+  background: radial-gradient(circle, rgb(238, 130, 130) 0%, rgb(56, 4, 108) 100%)
 
 
 }
