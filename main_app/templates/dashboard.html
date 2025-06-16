@@ -11,7 +11,7 @@
   {% for baby in babies %}
     <div class="baby-summary">
       <h3>{{ baby.name }}</h3>
-      <p id="birthdate"><strong>Birth Date:</strong> <br> {{ baby.birth_date|date:"F j, Y" }}</p>
+      <p id="birthdate"><strong>Date of Birth:</strong> <br> {{ baby.birth_date|date:"F j, Y" }}</p>
 
       <div class="baby-summary-field" id="feed-summary"
       style="background-image: url('{% static "images/feeding.jpg" %}');">

@@ -10,7 +10,7 @@ class UserProfileForm(forms.ModelForm):
 class FeedingForm(forms.ModelForm):
     class Meta:
         model = Feeding
-        fields = ['time', 'type', 'amount_ml']
+        fields = ['type', 'breast_used', 'amount_oz', 'solid_food_name', 'time']
         widgets = {
             'time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
@@ -27,7 +27,14 @@ class MedicineForm(forms.ModelForm):
 class AppointmentForm(forms.ModelForm):
     class Meta:
         model = Appointment
-        fields = ['doctor_name', 'location', 'time', 'reason', 'notes']
+        fields = ['doctor_name', 'location', 'latitude', 'longitude', 'time', 'reason', 'notes']
         widgets = {
+            'latitude': forms.HiddenInput(),
+            'longitude': forms.HiddenInput(),
             'time': forms.DateTimeInput(attrs={'type': 'datetime-local'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['location'].widget.attrs.update({'id': 'id_location'})
+        

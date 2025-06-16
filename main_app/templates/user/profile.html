@@ -22,7 +22,14 @@
     <p class="bio">{{ request.user.userprofile.bio|default:"No bio added yet." }}</p>
   </div>
 
+  
   <div class="baby-section">
+    <form id="signout" action="{% url 'logout' %}" method="post" style="display:inline;">
+  {% csrf_token %}
+  <button type="submit" class="btn-submit">
+    Log Out
+  </button>
+</form>
     <h3>My Babies</h3>
     {% for baby in request.user.babies.all %}
       <div class="baby-card">

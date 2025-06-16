@@ -8,9 +8,10 @@ h2 {
 }
 
 .feeding-form,
+.appointment-form,
 .profile-form,
 .medicine-form {
-  max-width: 400px;
+  max-width: 600px;
   margin: 1.5em auto;
   background: linear-gradient(to bottom right, rgb(238, 130, 130) 0%, rgb(56, 4, 119) 120%);
   padding: 2em;
@@ -37,7 +38,24 @@ h2 {
   transform: scale(1.1);
 }
 
+#map,
+  #address-search {
+    max-width: 600px;
+    margin: 0 auto 1em auto;
+    border: 2px solid rgb(56, 4, 119);
+    border-radius: 12px;
+  }
+  #map {
+    height: 400px;
+  }
+  #address-search {
+    width: 100%;
+    padding: 8px;
+    display: none;
+  }
+
 .feeding-form *,
+.appointment-form *,
 .medicine-form *,
 .profile-form * {
   box-sizing: border-box;
@@ -45,6 +63,7 @@ h2 {
 }
 
 .feeding-form p,
+.appointment-form p,
 .medicine-form p,
 .profile-form p {
   margin-bottom: 1.2em;
@@ -69,6 +88,13 @@ h2 {
 .feeding-form textarea,
 .feeding-form input[type="file"],
 
+.appointment-form input[type="text"],
+.appointment-form input[type="datetime-local"],
+.appointment-form input[type="number"],
+.appointment-form select,
+.appointment-form textarea,
+.appointment-form input[type="file"],
+
 .medicine-form input[type="text"],
 .medicine-form input[type="datetime-local"],
 .medicine-form input[type="number"],
@@ -91,11 +117,17 @@ h2 {
   font-size: 1em;
   background-color: rgba(102, 8, 8, 0.07);
   color:rgba(79, 2, 94);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 
 .feeding-form input:focus,
 .feeding-form select:focus,
 .feeding-form textarea:focus,
+
+.appointment-form input:focus,
+.appointment-form select:focus,
+.appointment-form textarea:focus,
 
 .medicine-form input:focus,
 .medicine-form select:focus,
@@ -113,6 +145,10 @@ h2 {
 .feeding-form select:hover,
 .feeding-form textarea:hover,
 
+.appointment-form input:hover,
+.appointment-form select:hover,
+.appointment-form textarea:hover,
+
 .medicine-form input:hover,
 .medicine-form select:hover,
 .medicine-form textarea:hover,
@@ -125,6 +161,7 @@ h2 {
 }
 
 .profile-form button[type="submit"],
+.appointment-form button[type="submit"],
 .medicine-form button[type="submit"],
 .feeding-form .btn-submit {
   display: block;
@@ -143,6 +180,7 @@ h2 {
 }
 
 .profile-form button[type="submit"]:hover,
+.appointment-form button[type="submit"]:hover,
 .medicine-form button[type="submit"]:hover,
 .feeding-form .btn-submit:hover {
   background-color: #c20346;

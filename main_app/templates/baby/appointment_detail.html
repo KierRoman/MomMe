@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <style>
+    #map { height: 400px; }
+  </style>
+{% endblock %}
+
+{% block content %}
+<h2>Appointment Detail</h2>
+
+<p><strong>Doctor:</strong> {{ appointment.doctor_name }}</p>
+<p><strong>Location:</strong> {{ appointment.location }}</p>
+<p><strong>Time:</strong> {{ appointment.time }}</p>
+
+{% if latitude and longitude %}
+  <div id="map"></div>
+
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var lat = {{ latitude }};
+      var lng = {{ longitude }};
+      var map = L.map('map').setView([lat, lng], 15);
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          attribution: '© OpenStreetMap contributors'
+      }).addTo(map);
+
+      L.marker([lat, lng]).addTo(map)
+        .bindPopup("{{ appointment.location }} (Dr. {{ appointment.doctor_name }})")
+        .openPopup();
+    });
+  </script>
+{% else %}
+  <p>No map data available.</p>
+{% endif %}
+
+{% endblock %}

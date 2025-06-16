@@ -3,21 +3,52 @@
 
 {% block head %}
   <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      function toggleFields() {
+        const type = document.getElementById("id_type").value;
+        const amountField = document.querySelector(".field-amount_oz");
+        const breastField = document.querySelector(".field-breast_used");
+        const solidFoodField = document.querySelector(".field-solid_food_name");
+
+        // Reset all
+        amountField.style.display = "none";
+        breastField.style.display = "none";
+        solidFoodField.style.display = "none";
+
+        if (type === "bottle") {
+          amountField.style.display = "block";
+        } else if (type === "breast") {
+          breastField.style.display = "block";
+        } else if (type === "solid") {
+          solidFoodField.style.display = "block";
+        }
+      }
+
+      const typeField = document.getElementById("id_type");
+      if (typeField) {
+        toggleFields(); // Initialize on load
+        typeField.addEventListener("change", toggleFields); // Update on change
+      }
+    });
+  </script>
 {% endblock %}
 
 {% block content %}
 <div class="edit-bar">
   <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Feeding for {{ baby.name }}</h2>
-
   <a href="{% url 'feedings' baby.id %}">
-    <img src="{% static 'images/back-arrow.jpg' %}">
-</a>
+    <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+  </a>
 </div>
 
-  <form method="post" class="feeding-form">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit" class="btn-submit">Save</button>
-  </form>
-
+<form method="post" class="feeding-form">
+  {% csrf_token %}
+  <div class="field">{{ form.time.label_tag }}{{ form.time }}</div>
+  <div class="field">{{ form.type.label_tag }}{{ form.type }}</div>
+  <div class="field field-amount_oz">{{ form.amount_oz.label_tag }}{{ form.amount_oz }}</div>
+  <div class="field field-breast_used">{{ form.breast_used.label_tag }}{{ form.breast_used }}</div>
+  <div class="field field-solid_food_name">{{ form.solid_food_name.label_tag }}{{ form.solid_food_name }}</div>
+  <button type="submit" class="btn-submit">Save</button>
+</form>
 {% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+{% endblock %}
+
+{% block content %}
+<div class="edit-bar">
+  <h2>
+    {% if form.instance.pk %}Edit{% else %}Add{% endif %} Appointment for {{ baby.name }}
+  </h2>
+  <a href="{% url 'appointments' baby.id %}">
+    <img src="{% static 'images/back-arrow.jpg' %}" alt="Back" />
+  </a>
+</div>
+
+<!-- Address Search (visible input) -->
+<input
+  type="text"
+  id="address-search"
+  placeholder="Type address and press Enter"
+  style="width: 100%; padding: 8px; margin-bottom: 10px;"
+/>
+
+<!-- Map -->
+<div id="map" style="height: 400px; margin-bottom: 15px;"></div>
+
+<!-- Appointment Form -->
+<form method="post" class="appointment-form" id="appointmentForm">
+  {% csrf_token %}
+
+  <!-- Render all fields except lat/lng/location -->
+  {% for field in form %}
+    {% if field.name != 'latitude' and field.name != 'longitude' and field.name != 'location' %}
+      <p>{{ field.label_tag }} {{ field }}</p>
+    {% endif %}
+  {% endfor %}
+
+  <!-- Hidden lat/lng/location inputs -->
+  {{ form.latitude.as_hidden }}
+  {{ form.longitude.as_hidden }}
+  {{ form.location.as_hidden }}
+
+  <!-- Button to sync map marker position to form fields -->
+  <button type="button" id="syncMapBtn" class="btn-submit" style="margin-bottom: 10px;">
+    Use Map Location
+  </button>
+
+  <button type="submit" class="btn-submit">Save</button>
+</form>
+
+<!-- Scripts -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const defaultLat = 31.1249;
+  const defaultLng = -97.4194;
+  const zoomLevel = 8;
+
+  const latInput = document.getElementById("id_latitude");
+  const lngInput = document.getElementById("id_longitude");
+  const locationInput = document.getElementById("id_location");
+  const addressSearch = document.getElementById("address-search");
+  const syncMapBtn = document.getElementById("syncMapBtn");
+
+  const initialLat = latInput.value ? parseFloat(latInput.value) : defaultLat;
+  const initialLng = lngInput.value ? parseFloat(lngInput.value) : defaultLng;
+
+  const map = L.map("map").setView([initialLat, initialLng], zoomLevel);
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+    attribution: "© OpenStreetMap contributors",
+  }).addTo(map);
+
+  let marker = null;
+  if (latInput.value && lngInput.value) {
+    marker = L.marker([initialLat, initialLng]).addTo(map);
+  }
+
+  // Update marker and lat/lng inputs on map click
+  map.on("click", function (e) {
+    const { lat, lng } = e.latlng;
+    if (marker) {
+      marker.setLatLng([lat, lng]);
+    } else {
+      marker = L.marker([lat, lng]).addTo(map);
+    }
+    console.log("Map clicked. Marker set at:", lat, lng);  // <-- Debug log
+    latInput.value = lat;
+    lngInput.value = lng;
+    if (locationInput) locationInput.value = "";
+  });
+
+  // Geocoder setup for address lookup
+  const geocoder = L.Control.Geocoder.nominatim();
+
+  L.Control.geocoder({
+    defaultMarkGeocode: true
+  }).addTo(map);
+
+  // Search by address on Enter keypress
+  addressSearch.addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      const query = addressSearch.value.trim();
+      if (!query) return;
+
+      geocoder.geocode(query, function (results) {
+        if (results.length === 0) {
+          alert("Address not found");
+          return;
+        }
+
+        const result = results[0];
+        const { lat, lng } = result.center;
+        map.setView([lat, lng], 15);
+
+        if (marker) {
+          marker.setLatLng([lat, lng]);
+        } else {
+          marker = L.marker([lat, lng]).addTo(map);
+        }
+
+        latInput.value = lat;
+        lngInput.value = lng;
+        if (locationInput) locationInput.value = result.name;
+      });
+    }
+  });
+
+  // Button: Sync Map Marker position to form fields
+  syncMapBtn.addEventListener("click", function () {
+    console.log("Sync button clicked. Marker:", marker);  // <-- Debug log
+    if (!marker) {
+      alert("Please select a location on the map first.");
+      return;
+    }
+    const { lat, lng } = marker.getLatLng();
+    latInput.value = lat;
+    lngInput.value = lng;
+    if (locationInput) locationInput.value = `Lat: ${lat.toFixed(5)}, Lng: ${lng.toFixed(5)}`;
+    alert("Location synced from map to form fields.");
+  });
+});
+</script>
+{% endblock %}

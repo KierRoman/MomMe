@@ -1,36 +1,88 @@
 {% extends 'base.html' %}
+{% load static %}
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/display.css' %}" />
+{% endblock %}
+
 {% block content %}
+<div class="med-card">
+  {% if baby %}
+    <h2>{{ baby.name }}'s Feedings</h2>
+    <a class="add-btn" href="{% url 'add_feeding' baby.id %}">➕ Add Feeding</a>
 
-{% if baby %}
-  <h2>{{ baby.name }}'s Feedings</h2>
-  <a href="{% url 'add_feeding' baby.id %}">➕ Add Feeding</a>
-  <ul>
-    {% for feeding in feedings %}
-      <li>
-        {{ feeding.time|date:"Y-m-d H:i" }} - {{ feeding.type }} 
-        {% if feeding.amount_ml %}({{ feeding.amount_ml }} ml){% endif %}
-        &nbsp; <a href="{% url 'edit_feeding' feeding.id %}">✏️ Edit</a>
-      </li>
-    {% empty %}
-      <li>No feedings recorded yet.</li>
-    {% endfor %}
-  </ul>
+    {% if feedings %}
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Type</th>
+            <th>Amount (oz)</th>
+            <th>Breast Used</th>
+            <th>Food Name</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for feeding in feedings %}
+            <tr>
+              <td>{{ feeding.time|date:"Y-m-d H:i" }}</td>
+              <td>{{ feeding.type }}</td>
+              <td>{% if feeding.amount_oz %}{{ feeding.amount_oz }}{% else %}-{% endif %}</td>
+              <td>
+                {% if feeding.type == "breast" and feeding.breast_used %}
+                  {{ feeding.breast_used|title }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                {% if feeding.type == "solid" and feeding.solid_food_name %}
+                  {{ feeding.solid_food_name }}
+                {% else %}
+                  -
+                {% endif %}
+              </td>
+              <td>
+                <a href="{% url 'edit_feeding' feeding.id %}">✏️ Edit</a>
+                <form action="{% url 'delete_feeding' feeding.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" onclick="return confirm('Are you sure you want to delete this feeding?')">🗑️ Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No feedings recorded yet.</p>
+    {% endif %}
 
-{% elif babies %}
-  {% for baby in babies %}
-    <h2>{{ baby.name }}</h2>
-    <ul>
-      {% if baby.latest_feeding %}
-        <li>{{ baby.latest_feeding.time|date:"Y-m-d H:i" }} - {{ baby.latest_feeding.type }}</li>
-      {% else %}
-        <li>No feedings yet.</li>
-      {% endif %}
-    </ul>
-    <a href="{% url 'feedings' baby.id %}">🔍 View All Feedings</a>
-  {% endfor %}
-
-{% else %}
-  <p>No babies found.</p>
-{% endif %}
-
+  {% else %}
+    {% if babies %}
+      {% for baby in babies %}
+        <h2>{{ baby.name }}</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Latest Feeding</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if baby.latest_feeding %}
+                <td>{{ baby.latest_feeding.time|date:"Y-m-d H:i" }} - {{ baby.latest_feeding.type }}</td>
+              {% else %}
+                <td>No feedings yet.</td>
+              {% endif %}
+              <td><a href="{% url 'feedings' baby.id %}">🔍 View All</a></td>
+            </tr>
+          </tbody>
+        </table>
+      {% endfor %}
+    {% else %}
+      <p>No babies found.</p>
+    {% endif %}
+  {% endif %}
+</div>
 {% endblock %}

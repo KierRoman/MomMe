@@ -26,10 +26,18 @@ class Baby(models.Model):
 
 
 class Feeding(models.Model):
+    BREAST_CHOICES = [
+        ('left', 'Left'),
+        ('right', 'Right'),
+        ('both', 'Both'),
+    ]
+    
     baby = models.ForeignKey(Baby, on_delete=models.CASCADE)
     time = models.DateTimeField(default=timezone.now)
     type = models.CharField(max_length=50, choices=[('bottle', 'Bottle'), ('breast', 'Breast'), ('solid', 'Solid')])
-    amount_ml = models.PositiveIntegerField(null=True, blank=True)
+    amount_oz = models.PositiveIntegerField(null=True, blank=True)
+    breast_used = models.CharField(max_length=5, choices=BREAST_CHOICES, blank=True, null=True)
+    solid_food_name = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return f"{self.baby.name} - {self.type} at {self.time.strftime('%Y-%m-%d %H:%M')}"
@@ -59,6 +67,8 @@ class Appointment(models.Model):
     baby = models.ForeignKey(Baby, on_delete=models.CASCADE)
     doctor_name = models.CharField(max_length=30)
     location = models.CharField(max_length=30)
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
     time = models.DateTimeField()
     reason = models.CharField(max_length=100, blank=True)
     notes = models.TextField(blank=True)

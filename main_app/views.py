@@ -4,6 +4,7 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.http import require_POST
 from django.contrib.auth.models import User
 from .forms import FeedingForm, UserProfileForm, MedicineForm, AppointmentForm
 from .models import Baby, UserProfile, Feeding, Diaper, Medicine, Appointment
@@ -98,13 +99,22 @@ def edit_feeding(request, feeding_id):
     return render(request, 'baby/feeding_form.html', {'form': form, 'baby': feeding.baby})
 
 
+@login_required
+@require_POST
+def delete_feeding(request, feeding_id):
+    feeding = get_object_or_404(Feeding, id=feeding_id, baby__user=request.user)
+    baby_id = feeding.baby.id
+    feeding.delete()
+    messages.success(request, 'Feeding deleted.')
+    return redirect('feedings', baby_id=baby_id)
+
 
 @login_required
 def medicines(request, baby_id=None):
     if baby_id:
         baby = get_object_or_404(Baby, id=baby_id, user=request.user)
         medicine = baby.medicine_set.order_by('-time_given')
-        return render (request, 'baby/medicines.html', {'baby': baby, 'medicine': medicine})
+        return render (request, 'baby/medicines.html', {'baby': baby, 'medicines': medicines})
     else:
         babies = request.user.babies.all()
         for baby in babies:
@@ -121,7 +131,7 @@ def add_medicine(request, baby_id):
             medicine = form.save(commit=False)
             medicine.baby = baby
             medicine.save()
-            return redirect('feedings', baby_id=baby.id)
+            return redirect('medicines', baby_id=baby.id)
     else:
         form = MedicineForm()
 
@@ -144,6 +154,14 @@ def edit_medicine(request, medicine_id):
     return render(request, 'baby/medicine_form.html', {'form': form, 'baby': baby})
 
 
+@login_required
+@require_POST
+def delete_medicine(request, medicine_id):
+    medicine = get_object_or_404(Medicine, id=medicine_id, baby__user=request.user)
+    baby_id = medicine.baby.id
+    medicine.delete()
+    messages.success(request, 'Medicine deleted.')
+    return redirect('medicines', baby_id=baby_id)
 
 @login_required
 def appointments(request, baby_id=None):
@@ -152,11 +170,24 @@ def appointments(request, baby_id=None):
         appointments = baby.appointment_set.order_by('-time')
         return render(request, 'baby/appointments.html', {'baby': baby, 'appointments': appointments})
     else:
-        babies = request.ser.babies.all()
+        babies = request.user.babies.all()
         for baby in babies:
             baby.next_appointment = baby.appointment_set.order_by('-time').first()
-            return render(request, 'baby/appointments.html', {'babies': babies})
+    return render(request, 'baby/appointments.html', {'babies': babies})
         
+
+@login_required
+def appointment_detail(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id, baby__user=request.user)
+
+    context = {
+        'appointment': appointment,
+        'latitude': appointment.latitude,
+        'longitude': appointment.longitude,
+    }
+
+    return render(request, 'baby/appointment_detail.html', context)
+
 @login_required
 def add_appointment(request, baby_id):
     baby = get_object_or_404(Baby, id=baby_id, user=request.user)
@@ -169,21 +200,32 @@ def add_appointment(request, baby_id):
             appointment.save()
             return redirect('appointments', baby_id=baby.id)
         else:
-            form = AppointmentForm()
-        return render(request, 'baby/appointments_form.html', {'form': form, 'baby': baby})
+            print(form.errors)
+    else:
+        form = AppointmentForm()
+    return render(request, 'baby/appointment_form.html', {'form': form, 'baby': baby})
     
 
 @login_required
 def edit_appointment(request, appointment_id):
-    appointment = get_object_or_404(Appointment, id=appointment_id, user=request.user)
+    appointment = get_object_or_404(Appointment, id=appointment_id, baby__user=request.user)
     baby = appointment.baby
 
     if request.method == 'POST':
         form = AppointmentForm(request.POST, instance=appointment)
         if form.is_valid():
             form.save()
-            return redirect('appointmets', baby_id=baby.id)
-        else:
+            return redirect('appointments', baby_id=baby.id)
+    else:
             form = AppointmentForm(instance=appointment)
-        return render(request, 'baby/appointment_form.html', {'form': form, 'baby': baby})
+    return render(request, 'baby/appointment_form.html', {'form': form, 'baby': baby})
     
+
+@login_required
+@require_POST
+def delete_appointment(request, appointment_id):
+    appointment = get_object_or_404(Appointment, id=appointment_id, baby__user=request.user)
+    baby_id = appointment.baby.id
+    appointment.delete()
+    messages.success(request, 'Appointment deleted.')
+    return redirect('appointments', baby_id=baby_id)

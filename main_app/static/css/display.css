@@ -2,3 +2,64 @@ main {
     color: rgb(34, 14, 113);
     text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
 }
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1em;
+  background-color: rgba(238,130,130,0.4);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.4s ease;
+}
+
+.data-table th, .data-table td {
+  padding: 0.75em 1em;
+  border-bottom: 1px solid rgb(34, 14, 113);
+  text-align: left;
+}
+
+.data-table th {
+  background-color: rgb(56, 4, 119);
+  color: rgb(179, 0, 0);
+}
+
+/* .data-table tr:nth-child(even) {
+  background-color: rgba(238,130,130,0.4);
+} */
+
+.data-table tr:hover {
+  background-color: rgba(238,130,130,0.5);
+}
+
+.add-btn {
+  display: inline-block;
+  margin-bottom: 1em;
+  color: white;
+  background: rgb(79, 2, 94);
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 6px;
+}
+
+.add-btn:hover {
+  background: rgb(119, 10, 130);
+}
+
+.data-table form {
+  display: inline;
+}
+
+.data-table button {
+  background: none;
+  border: none;
+  color: rgb(179, 0, 0);
+  cursor: pointer;
+  font-size: 0.95em;
+  margin-left: 0.5em;
+}
+
+.data-table button:hover {
+  text-decoration: underline;
+}

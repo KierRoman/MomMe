@@ -32,6 +32,21 @@ main {
   transform: scale(1.1);
 }
 
+.btn-submit {
+  color:rgb(34, 14, 113);
+  text-decoration: none;
+  font-family: 'Pacifico', cursive;
+  text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
+}
+
+.btn-submit {
+  margin-left: 80%;
+  color:rgb(34, 14, 113);
+  background-color: transparent;
+  border: transparent;
+  cursor: pointer;
+}
+
 .profile-info {
   text-align: center;
   margin-bottom: 2em;
@@ -39,11 +54,15 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 160px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .profile-pic {
   width: 140px;
-  height: 140px;
+  max-width: 140px;
+  aspect-ratio: 1/1;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid rgb(56, 4, 119);
@@ -62,6 +81,7 @@ h2 {
 
 .baby-section h3 {
   margin-bottom: 1em;
+  font-family: 'Pacifico', cursive;
 }
 
 .baby-card {
