@@ -6,8 +6,13 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
+    path('babies/add/', views.add_baby, name='add_baby'),
     path('profile/', views.user_profile, name='user_profile'),
     path('profile/edit/', views.update_user_profile, name='update_user_profile'),
+    path('babies/<int:baby_id>/diapers/', views.diapers, name='diapers'),
+    path('babies/<int:baby_id>/diapers/add/', views.add_diaper, name='add_diaper'),
+    path('diapers/<int:diaper_id>/edit/', views.edit_diaper, name='edit_diaper'),
+    path('diapers/<int:diaper_id>/delete/', views.delete_diaper, name='delete_diaper'),
     path('appointments/', views.appointments, name='appointments'),
     path('appointments/<int:baby_id>/', views.appointments, name='appointments'),
     path('appointments/<int:baby_id>/add/', views.add_appointment, name='add_appointment'),

@@ -2,18 +2,27 @@
 {% load static %}
 
 {% block head %}
+
+<link rel="stylesheet" href="{% static 'css/display.css' %}" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-  <style>
-    #map { height: 400px; }
-  </style>
+ 
 {% endblock %}
 
 {% block content %}
-<h2>Appointment Detail</h2>
+<div class="appt-detail">
+  <h2>Appointment Detail</h2>
+  
+  <p><strong>Doctor:</strong> {{ appointment.doctor_name }}</p>
+  <p><strong>Location:</strong> {{ appointment.location }}</p>
+  <p><strong>Time:</strong> {{ appointment.time }}</p>
+  <br>
+  <div class='back'>
+  <a href="{% url 'appointments' %}">
+      <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+    </a>
+  </div>
+</div>
 
-<p><strong>Doctor:</strong> {{ appointment.doctor_name }}</p>
-<p><strong>Location:</strong> {{ appointment.location }}</p>
-<p><strong>Time:</strong> {{ appointment.time }}</p>
 
 {% if latitude and longitude %}
   <div id="map"></div>

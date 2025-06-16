@@ -3,10 +3,11 @@ from django.utils import timezone
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib import messages
+from django.contrib.auth import login
+from django.contrib.auth.models import User
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.contrib.auth.models import User
-from .forms import FeedingForm, UserProfileForm, MedicineForm, AppointmentForm
+from .forms import FeedingForm, UserProfileForm, MedicineForm, AppointmentForm, CustomUserCreationForm, BabyForm, DiaperForm
 from .models import Baby, UserProfile, Feeding, Diaper, Medicine, Appointment
 # Create your views here.
 
@@ -20,6 +21,36 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
 
 def home(request):
     return render(request, 'home.html')
+
+def signup(request):
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = form.save()
+            profile = user.userprofile
+            profile.name = form.cleaned_data.get('name')
+            profile.bio = form.cleaned_data.get('bio')
+            profile.profile_pic = form.cleaned_data.get('profile_pic')
+            profile.save()
+            login(request, user)
+            return redirect('dashboard')
+    else:
+        form = CustomUserCreationForm()
+
+    return render(request, 'registration/signup.html', {'form': form})
+
+@login_required
+def add_baby(request):
+    if request.method == 'POST':
+        form = BabyForm(request.POST)
+        if form.is_valid():
+            baby = form.save(commit=False)
+            baby.user = request.user
+            baby.save()
+            return redirect('dashboard')
+    else:
+        form = BabyForm()
+    return render(request, 'baby/baby_form.html', {'form': form})
 
 @login_required
 def user_profile(request):
@@ -45,6 +76,9 @@ def update_user_profile(request):
 @login_required
 def dashboard(request):
     babies = request.user.babies.all()
+
+    if not babies.exists():
+        return redirect('add_baby')
 
     for baby in babies:
         baby.latest_feeding = baby.feeding_set.order_by('-time').first()
@@ -229,3 +263,56 @@ def delete_appointment(request, appointment_id):
     appointment.delete()
     messages.success(request, 'Appointment deleted.')
     return redirect('appointments', baby_id=baby_id)
+
+@login_required
+def diapers(request, baby_id=None):
+    if baby_id:
+        baby = get_object_or_404(Baby, id=baby_id, user=request.user)
+        diapers = baby.diaper_set.order_by('-time')
+        return render(request, 'baby/diapers.html', {'baby': baby, 'diapers': diapers})
+    else:
+        babies = request.user.babies.all()
+        for baby in babies:
+            baby.latest_diaper = baby.diaper_set.order_by('-time').first()
+        return render(request, 'baby/diapers.html', {'babies': babies})
+    
+
+@login_required
+def add_diaper(request, baby_id):
+    baby = get_object_or_404(Baby, id=baby_id, user=request.user)
+
+    if request.method == 'POST':
+        form = DiaperForm(request.POST)
+        if form.is_valid():
+            diaper = form.save(commit=False)
+            diaper.baby = baby
+            diaper.save()
+            return redirect('diapers', baby_id=baby.id)
+    else:
+        form = DiaperForm()
+
+    return render(request, 'baby/diaper_form.html', {'form': form, 'baby': baby})
+
+
+def edit_diaper(request, diaper_id):
+    diaper = get_object_or_404(Diaper, id=diaper_id, baby__user=request.user)
+    baby = diaper.baby
+
+    if request.method == 'POST':
+        form = DiaperForm(request.POST, instance=diaper)
+        if form.is_valid():
+            form.save()
+            return redirect('diapers', baby_id=baby.id)
+    else:
+        form = DiaperForm(instance=diaper)
+
+    return render(request, 'baby/diaper_form.html', {'form': form, 'baby': baby})
+
+@login_required
+@require_POST
+def delete_diaper(request, diaper_id):
+    diaper = get_object_or_404(Diaper, id=diaper_id, baby__user=request.user)
+    baby_id = diaper.baby.id
+    diaper.delete()
+    messages.success(request, 'Diaper entry deleted.')
+    return redirect('diapers', baby_id=baby_id)

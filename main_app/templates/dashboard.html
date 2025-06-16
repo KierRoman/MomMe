@@ -86,10 +86,20 @@
             No diaper changes recorded.
           {% endif %}
         </p>
+
+        <div class="card-footer">
+          {% if baby.latest_diaper %}
+          <a href="{% url 'diapers' baby.id %}">Diapers for {{ baby.name }} →</a>
+          {% else %}
+          <a href="{% url 'diapers' baby.id %}">Add an Diaper →</a>
+          {% endif %}
+        </div>
+
       </div>
     </div>
     {% comment %} <hr> {% endcomment %}
   {% empty %}
     <p>You haven’t added any babies yet.</p>
+    <a href="{% url 'add_baby' %}" class="btn">Add a Baby →</a>
   {% endfor %}
 {% endblock %}

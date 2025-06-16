@@ -78,10 +78,10 @@ a {
 /* ---------- Navigation Menu Dropdown ---------- */
 .nav-links {
   display: none; /* Hidden by default */
-  margin-left: 70%;
+  margin-left: 80%;
   max-width: 500px;
   background-color: #fff;
-  width: 30%;
+  width: 20%;
   position: absolute;
   top: 6rem;
   z-index: 999;

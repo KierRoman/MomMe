@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/display.css' %}" />
+{% endblock %}
+
+{% block content %}
+<div class="med-card">
+  {% if baby %}
+    <h2>{{ baby.name }}'s Diaper Changes</h2>
+    <a class="add-btn" href="{% url 'add_diaper' baby.id %}">➕ Add Diaper Change</a>
+
+    {% if baby.diaper_set.exists %}
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Time</th>
+            <th>Type</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for diaper in baby.diaper_set.all|dictsortreversed:"time" %}
+            <tr>
+              <td>{{ diaper.time|date:"Y-m-d H:i" }}</td>
+              <td>{{ diaper.get_type_display }}</td>
+              <td>
+                <a href="{% url 'edit_diaper' diaper.id %}">✏️ Edit</a>
+                <form action="{% url 'delete_diaper' diaper.id %}" method="post" style="display:inline;">
+                  {% csrf_token %}
+                  <button type="submit" onclick="return confirm('Are you sure you want to delete this diaper record?')">🗑️ Delete</button>
+                </form>
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    {% else %}
+      <p>No diaper changes recorded yet.</p>
+    {% endif %}
+
+  {% else %}
+    {% if babies %}
+      {% for baby in babies %}
+        <h2>{{ baby.name }}</h2>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Last Diaper Change</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              {% if baby.latest_diaper %}
+                <td>{{ baby.latest_diaper.time|date:"Y-m-d H:i" }} — {{ baby.latest_diaper.get_type_display }}</td>
+              {% else %}
+                <td>No diaper changes yet.</td>
+              {% endif %}
+              <td><a href="{% url 'diapers' baby.id %}">🔍 View All</a></td>
+            </tr>
+          </tbody>
+        </table>
+      {% endfor %}
+    {% else %}
+      <p>No babies found.</p>
+    {% endif %}
+  {% endif %}
+</div>
+{% endblock %}

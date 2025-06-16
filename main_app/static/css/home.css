@@ -1,8 +1,14 @@
-h2 {
+h2, p {
     text-align: center;
     color: rgb(34, 4, 113);
     font-family: 'Pacifico', cursive;
     text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(228, 16, 66);
+    text-shadow: 2px 2px 4px rgba(41, 2, 2, 0.6);
 }
 
 .login-card {

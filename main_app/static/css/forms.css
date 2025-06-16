@@ -8,6 +8,9 @@ h2 {
 }
 
 .feeding-form,
+.diaper-form,
+.baby-form,
+.signup-form,
 .appointment-form,
 .profile-form,
 .medicine-form {
@@ -55,6 +58,9 @@ h2 {
   }
 
 .feeding-form *,
+.diaper-form *,
+.baby-form *,
+.signup-form *,
 .appointment-form *,
 .medicine-form *,
 .profile-form * {
@@ -63,6 +69,8 @@ h2 {
 }
 
 .feeding-form p,
+.diaper-form p,
+.signup-form p,
 .appointment-form p,
 .medicine-form p,
 .profile-form p {
@@ -87,6 +95,23 @@ h2 {
 .feeding-form select,
 .feeding-form textarea,
 .feeding-form input[type="file"],
+
+.baby-form input[type="text"],
+.baby-form input[type="date"],
+.baby-form select,
+
+.diaper-form input[type="text"],
+.diaper-form input[type="datetime-local"],
+.diaper-form select,
+
+.signup-form input[type="text"],
+.signup-form input[type="password"],
+.signup-form input[type="email"],
+.signup-form input[type="datetime-local"],
+.signup-form input[type="number"],
+.signup-form select,
+.signup-form textarea,
+.signup-form input[type="file"],
 
 .appointment-form input[type="text"],
 .appointment-form input[type="datetime-local"],
@@ -125,6 +150,14 @@ h2 {
 .feeding-form select:focus,
 .feeding-form textarea:focus,
 
+.diaper-form input:focus,
+.diaper-form select:focus,
+.diaper-form textarea:focus,
+
+.signup-form input:focus,
+.signup-form select:focus,
+.signup-form textarea:focus,
+
 .appointment-form input:focus,
 .appointment-form select:focus,
 .appointment-form textarea:focus,
@@ -145,6 +178,14 @@ h2 {
 .feeding-form select:hover,
 .feeding-form textarea:hover,
 
+.diaper-form input:hover,
+.diaper-form select:hover,
+.diaper-form textarea:hover,
+
+.signup-form input:hover,
+.signup-form select:hover,
+.signup-form textarea:hover,
+
 .appointment-form input:hover,
 .appointment-form select:hover,
 .appointment-form textarea:hover,
@@ -161,6 +202,9 @@ h2 {
 }
 
 .profile-form button[type="submit"],
+.diaper-form button[type="submit"],
+.baby-form button[type="submit"],
+.signup-form button[type="submit"],
 .appointment-form button[type="submit"],
 .medicine-form button[type="submit"],
 .feeding-form .btn-submit {
@@ -180,6 +224,9 @@ h2 {
 }
 
 .profile-form button[type="submit"]:hover,
+.diaper-form button[type="submit"]:hover,
+.baby-form button[type="submit"]:hover,
+.signup-form button[type="submit"]:hover,
 .appointment-form button[type="submit"]:hover,
 .medicine-form button[type="submit"]:hover,
 .feeding-form .btn-submit:hover {
@@ -202,4 +249,10 @@ h2 {
 
 select {
   background-color: rgba(102, 8, 8, 0.07);
+}
+
+.diaper-form a {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
 }

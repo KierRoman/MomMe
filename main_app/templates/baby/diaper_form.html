@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+<link rel="stylesheet" href="{% static 'css/forms.css' %}" />
+{% endblock %}
+
+{% block content %}
+  <div class="edit-bar">
+      <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Diaper Entry for {{ baby.name }}</h2>
+      <a href="{% url 'diapers' baby.id %}">
+        <img src="{% static 'images/back-arrow.jpg' %}" alt="Back" />
+      </a>
+  </div>
+
+  <form method="post" class='diaper-form'>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">💾 Save</button>
+  </form>
+{% endblock %}

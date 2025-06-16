@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Django
+*.sqlite3
+.env
+db.sqlite3
+
+# OS
+.DS_Store
+
+# Virtual Environments
+venv/
+env/
+
+# Heroku
+*.log
+
+# VSCode or PyCharm
+.vscode/
+.idea/
