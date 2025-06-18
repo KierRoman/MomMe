@@ -21,7 +21,7 @@
 | Backend      | Python, Django     |
 | Database     | PostgreSQL         |
 | Frontend     | HTML, CSS, JavaScript (Django templates) |
-| Deployment   | Heroku (or your platform of choice) |
+| Deployment   | Heroku  |
 
 ---
 
