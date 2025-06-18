@@ -5,7 +5,7 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
-    path('/', views.home, name='home'),
+    path('', views.home, name='home'),
     path('dashboard/', views.dashboard, name='dashboard'),
     path('babies/add/', views.add_baby, name='add_baby'),
     path('profile/', views.user_profile, name='user_profile'),
@@ -36,3 +36,5 @@ urlpatterns = [
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATICFILES_DIRS[0])

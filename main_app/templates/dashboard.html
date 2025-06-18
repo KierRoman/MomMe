@@ -39,7 +39,7 @@
         <p><strong>💊 Current Medicine:</strong>
           <br>
           {% if baby.current_medicine %}
-            {{ baby.current_medicine.name }} ({{ baby.current_medicine.dose_mg }}mg) @ {{ baby.current_medicine.time_given|date:"M j, H:i" }}
+            {{ baby.current_medicine.name }} ({{ baby.current_medicine.dose_mg }}mg) 
           {% else %}
             No medicine recorded.
           {% endif %}

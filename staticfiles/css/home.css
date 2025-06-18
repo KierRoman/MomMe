@@ -1,0 +1,67 @@
+h2, p {
+    text-align: center;
+    color: rgb(34, 4, 113);
+    font-family: 'Pacifico', cursive;
+    text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
+}
+
+a {
+    text-decoration: none;
+    color: rgb(228, 16, 66);
+    text-shadow: 2px 2px 4px rgba(41, 2, 2, 0.6);
+}
+
+.login-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+    margin-top: 5%;
+    width: 80%;
+    min-height: 40vh;
+    max-width: 600px;
+    border-radius: 20px;
+    background-color: rgba(34, 4, 113, 0.35);
+    box-shadow: 5px 3px 8px rgb(34, 4, 113);
+}
+
+.login-card label {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    color:rgb(34, 4, 113);
+    text-shadow: 2px 2px 4px rgba(238,130,130,0.6);
+    /* border: 2px solid red; */
+}
+
+.login-card input {
+    color: rgb(34, 4, 113);
+    margin-top: 0;
+    width: 20rem;
+    height: 20px;
+    border-radius: 20px;
+    background-color: rgba(238,130,130,0.3);
+    border: 2px solid rgba(34, 4, 113, 0.35);
+    transition: border 0.4s, ease;
+}
+
+.login-card input:hover,
+.login-card input:active,
+.login-card input:focus {
+    box-shadow: 0 0 5px rgba(0,123,255,0.5);
+    border: 2px solid rgba(34, 4, 113, .5);
+    outline: none;
+    background-color: rgba(238,130,130,0.3);
+}
+
+.login-card button {
+    cursor: pointer;
+    width: 200px;
+    margin: 20px auto;
+    display: block;
+    font-size: 15px;
+    border-radius: 15px;
+    font-family: 'Pacifico', cursive;
+    background-color: rgba(34, 4, 113, 0.55);
+    color: rgb(238,130,130)
+}

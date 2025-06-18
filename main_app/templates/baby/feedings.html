@@ -42,11 +42,11 @@
                   -
                 {% endif %}
               </td>
-              <td>
-                <a href="{% url 'edit_feeding' feeding.id %}">✏️ Edit</a>
+              <td class="actions">
+                <a href="{% url 'edit_feeding' feeding.id %}">✏️</a>
                 <form action="{% url 'delete_feeding' feeding.id %}" method="post" style="display:inline;">
                   {% csrf_token %}
-                  <button type="submit" onclick="return confirm('Are you sure you want to delete this feeding?')">🗑️ Delete</button>
+                  <button type="submit" onclick="return confirm('Are you sure you want to delete this feeding?')">🗑️</button>
                 </form>
               </td>
             </tr>

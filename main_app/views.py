@@ -147,7 +147,7 @@ def delete_feeding(request, feeding_id):
 def medicines(request, baby_id=None):
     if baby_id:
         baby = get_object_or_404(Baby, id=baby_id, user=request.user)
-        medicine = baby.medicine_set.order_by('-time_given')
+        medicines = baby.medicine_set.order_by('-time_given')
         return render (request, 'baby/medicines.html', {'baby': baby, 'medicines': medicines})
     else:
         babies = request.user.babies.all()
