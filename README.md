@@ -31,7 +31,9 @@
 - Each user’s data is private and scoped to their account
 
 ---
+## Planning
 
+Trello - [MomMe Board](https://trello.com/b/vU3MJhdC/momme)
 
 
 ---
