@@ -21,7 +21,7 @@
 | Backend      | Python, Django     |
 | Database     | PostgreSQL         |
 | Frontend     | HTML, CSS, JavaScript (Django templates) |
-| Deployment   | Heroku (or your platform of choice) |
+| Deployment   | Heroku  |
 
 ---
 
@@ -31,14 +31,10 @@
 - Each user’s data is private and scoped to their account
 
 ---
+## Planning
 
-## 📷 Screenshots
+Trello - [MomMe Board](https://trello.com/b/vU3MJhdC/momme)
 
-> _Ensure these paths are correct if using local screenshots or host them on a service like Imgur or GitHub Issues for public display._
-
-![Dashboard](static/images/dashboard.png)
-![Feeding Log](static/images/feeding-log.png)
-![Add Appointment](static/images/add-appointment.png)
 
 ---
 
