@@ -9,6 +9,7 @@ pillow = "*"
 folium = "*"
 dj-database-url = "*"
 python-decouple = "*"
+gunicorn = "*"
 
 [dev-packages]
 
