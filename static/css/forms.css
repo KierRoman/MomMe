@@ -98,6 +98,8 @@ h2 {
 
 .baby-form input[type="text"],
 .baby-form input[type="date"],
+.baby-form input[type="number"],
+.baby-form input[type="file"],
 .baby-form select,
 
 .diaper-form input[type="text"],

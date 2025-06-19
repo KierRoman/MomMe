@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block head %}
+
+<link rel="stylesheet" href="{% static 'css/display.css' %}" />
+
+{% endblock %}
+
+{% block content %}
+<div class="baby-detail">
+  <h2>Baby Detail</h2>
+  
+  <p><strong>Name:</strong> {{ baby.name }}</p>
+  <p><strong>Birth Date:</strong> {{ baby.birth_date }}</p>
+  <p><strong>Height:</strong> {{ baby.height_in }}</p>
+  <p><strong>Weight:</strong> {{ baby.weight_lb }}</p>
+  <br>
+  <div class='back'>
+  <a href="{% url 'user_profile' %}">
+      <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+    </a>
+  </div>
+</div>
+
+{% endblock %}

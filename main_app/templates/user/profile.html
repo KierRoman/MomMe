@@ -30,10 +30,19 @@
     Log Out
   </button>
 </form>
+<div class="baby-info-head">
     <h3>My Babies</h3>
+      <p><a href="{% url 'add_baby' %}">Add Baby</a></p>
+    </div>
     {% for baby in request.user.babies.all %}
       <div class="baby-card">
-        <h4>{{ baby.name }}</h4>
+        <div id='baby-card-top'>
+        <h4><a href="{% url 'baby_detail' baby.id %}">{{ baby.name }}</a></h4>
+        <form action="{% url 'delete_baby' baby.id %}" method="post" style="margin: 0;">
+      {% csrf_token %}
+      <button type="submit" class="remove-button" onclick="return confirm('Are you sure you want to remove {{ baby.name }}?')">🗑️</button>
+    </form>
+  </div>
         <p>Born: {{ baby.birth_date }}</p>
         {% if baby.photo %}
           <img src="{{ baby.photo.url }}" class="baby-photo">

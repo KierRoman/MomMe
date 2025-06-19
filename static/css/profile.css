@@ -74,6 +74,12 @@ h2 {
    font-family: 'Pacifico', cursive;
 }
 
+.baby-info-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .bio {
   font-style: italic;
   color: rgb(34, 14, 113);
@@ -91,6 +97,23 @@ h2 {
   border-color: #c20346;
   margin-bottom: 1em;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+#baby-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove-button {
+  background: none;
+  border: none;
+  color: red;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+.remove-button:hover {
+  color: darkred;
 }
 
 .baby-photo {

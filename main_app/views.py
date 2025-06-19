@@ -40,6 +40,11 @@ def signup(request):
     return render(request, 'registration/signup.html', {'form': form})
 
 @login_required
+def baby_detail(request, baby_id):
+    baby = get_object_or_404(Baby, id=baby_id, user=request.user)
+    return render(request, 'baby/baby_detail.html', {'baby': baby})
+
+@login_required
 def add_baby(request):
     if request.method == 'POST':
         form = BabyForm(request.POST)
@@ -47,10 +52,31 @@ def add_baby(request):
             baby = form.save(commit=False)
             baby.user = request.user
             baby.save()
-            return redirect('dashboard')
+            return redirect('baby_detail', baby_id=baby.id)
     else:
         form = BabyForm()
     return render(request, 'baby/baby_form.html', {'form': form})
+
+@login_required
+def edit_baby(request, baby_id):
+    baby = get_object_or_404(Baby, id=baby_id, user=request.user)
+
+    if request.method == 'POST':
+        form = BabyForm(request.POST, instance=baby)
+        if form.is_valid():
+            form.save()
+            return redirect('baby_detail', baby_id=baby.id)
+    else:
+        form = BabyForm(instance=baby)
+    return render(request, 'baby/baby_form.html', {'form': form, 'baby': baby})
+
+@login_required
+@require_POST
+def delete_baby(request, baby_id):
+    baby = get_object_or_404(Baby, id=baby_id, user=request.user)
+    baby.delete()
+    messages.success(request, f"{baby.name} has been removed.")
+    return redirect('user_profile') 
 
 @login_required
 def user_profile(request):

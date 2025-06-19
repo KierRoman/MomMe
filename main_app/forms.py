@@ -22,7 +22,7 @@ class CustomUserCreationForm(UserCreationForm):
 class BabyForm(forms.ModelForm):
     class Meta:
         model = Baby
-        fields = ['name', 'birth_date']  # Add other fields if your Baby model has more
+        fields = ['name', 'birth_date', 'height_in', 'weight_lb', 'photo']  # Add other fields if your Baby model has more
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date'}),
         }

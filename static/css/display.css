@@ -64,7 +64,9 @@ main {
   text-decoration: underline;
 }
 
-.appt-detail {
+
+.appt-detail,
+.baby-detail {
   display: flex;
   flex-direction: column;
   align-items: center;
