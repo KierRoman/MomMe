@@ -1,55 +1,75 @@
-{% extends 'base.html' %}
-{% load static %}
-
-{% block head %}
-<link rel="stylesheet" href="{% static 'css/profile.css' %}">
-{% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% block head %}
+<link rel="stylesheet" href="{% static 'css/profile.css' %}" />
+{% endblock %} {% block content %}
 <div class="profiles-container">
   <div class="profile-info">
     {% if request.user.userprofile.profile_pic %}
-      <img src="{{ request.user.userprofile.profile_pic.url }}" alt="Profile Picture" class="profile-pic">
+    <img
+      src="{{ request.user.userprofile.profile_pic.url }}"
+      alt="Profile Picture"
+      class="profile-pic"
+    />
     {% else %}
-      <img src="{% static 'images/default-profile.png' %}" alt="Default Profile" class="profile-pic">
+    <img
+      src="{% static 'images/default-profile.png' %}"
+      alt="Default Profile"
+      class="profile-pic"
+    />
     {% endif %}
 
     <a href="{% url 'update_user_profile' %}">
-      <img id='editicon' src="{% static 'images/edit.png' %}"alt="Edit Icon">
+      <img id="editicon" src="{% static 'images/edit.png' %}" alt="Edit Icon" />
     </a>
 
     <h2>{{ request.user.userprofile.name|default:request.user.username }}</h2>
-    <p class="bio">{{ request.user.userprofile.bio|default:"No bio added yet." }}</p>
+    <p class="bio">
+      {{ request.user.userprofile.bio|default:"No bio added yet." }}
+    </p>
   </div>
 
-  
   <div class="baby-section">
-    <form id="signout" action="{% url 'logout' %}" method="post" style="display:inline;">
-  {% csrf_token %}
-  <button type="submit" class="btn-submit">
-    Log Out
-  </button>
-</form>
-<div class="baby-info-head">
-    <h3>My Babies</h3>
-      <p><a href="{% url 'add_baby' %}">Add Baby</a></p>
+    <form
+      id="signout"
+      action="{% url 'logout' %}"
+      method="post"
+      style="display: inline"
+    >
+      {% csrf_token %}
+      <button type="submit" class="btn-submit">Log Out</button>
+    </form>
+    <div class="baby-info-head">
+      <h3>My Babies</h3>
+      <p id="add-baby"><a href="{% url 'add_baby' %}">Add Baby</a></p>
     </div>
     {% for baby in request.user.babies.all %}
-      <div class="baby-card">
-        <div id='baby-card-top'>
+    <div class="baby-card">
+      <div id="baby-card-top">
         <h4><a href="{% url 'baby_detail' baby.id %}">{{ baby.name }}</a></h4>
-        <form action="{% url 'delete_baby' baby.id %}" method="post" style="margin: 0;">
-      {% csrf_token %}
-      <button type="submit" class="remove-button" onclick="return confirm('Are you sure you want to remove {{ baby.name }}?')">🗑️</button>
-    </form>
-  </div>
-        <p>Born: {{ baby.birth_date }}</p>
-        {% if baby.photo %}
-          <img src="{{ baby.photo.url }}" class="baby-photo">
-        {% endif %}
+        <div id="baby-card-buttons">
+          <a href="{% url 'edit_baby' baby.id %}">✏️</a>
+          <form
+            action="{% url 'delete_baby' baby.id %}"
+            method="post"
+            style="margin: 0"
+          >
+            {% csrf_token %}
+            <button
+              type="submit"
+              class="remove-button"
+              onclick="return confirm('Are you sure you want to remove {{ baby.name }}?')"
+            >
+              🗑️
+            </button>
+          </form>
+        </div>
       </div>
+      <p>Born: {{ baby.birth_date }}</p>
+      {% if baby.photo %}
+      <img src="{{ baby.photo.url }}" class="baby-photo" />
+      {% endif %}
+    </div>
     {% empty %}
-      <p>No babies registered yet.</p>
+    <p>No babies registered yet.</p>
     {% endfor %}
   </div>
 </div>

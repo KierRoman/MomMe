@@ -98,3 +98,10 @@ a {
   text-decoration: none;
   color: rgb(34, 14, 113);
 }
+
+.baby-photo {
+  width: 10rem;
+  height: 10rem;
+  aspect-ratio: 1/1;
+  border-radius: 20px;
+}

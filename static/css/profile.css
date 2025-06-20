@@ -69,6 +69,19 @@ main {
   margin-bottom: .5em;
 }
 
+#add-baby {
+  text-decoration: none;
+  width: 5rem;
+  display: flex;
+  background-color: rgb(34, 14, 113);
+  justify-content: center;
+  border-radius: 15px;
+}
+
+#add-baby a {
+  color: rgb(238, 130, 130);
+  font-family: 'Pacifico', cursive;
+}
 
 h2 {
    font-family: 'Pacifico', cursive;
@@ -99,10 +112,23 @@ h2 {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
+.baby-card img {
+  margin-left: 35%;
+}
+
 #baby-card-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+#baby-card-top a {
+  text-decoration: none;
+  color: rgb(34, 14, 113);
+}
+
+#baby-card-buttons {
+  display: flex;
 }
 
 .remove-button {

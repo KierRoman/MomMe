@@ -62,7 +62,7 @@ def edit_baby(request, baby_id):
     baby = get_object_or_404(Baby, id=baby_id, user=request.user)
 
     if request.method == 'POST':
-        form = BabyForm(request.POST, instance=baby)
+        form = BabyForm(request.POST, request.FILES, instance=baby)
         if form.is_valid():
             form.save()
             return redirect('baby_detail', baby_id=baby.id)

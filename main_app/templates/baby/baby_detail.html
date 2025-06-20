@@ -15,7 +15,11 @@
   <p><strong>Birth Date:</strong> {{ baby.birth_date }}</p>
   <p><strong>Height:</strong> {{ baby.height_in }}</p>
   <p><strong>Weight:</strong> {{ baby.weight_lb }}</p>
-  <br>
+{% if baby.photo %}
+  <img src="{{ baby.photo.url }}" class="baby-photo" alt="{{ baby.name }}">
+{% else %}
+  <img src="{% static 'images/babydiaper.jpg' %}" class="baby-photo" alt="Default baby">
+{% endif %}  <br>
   <div class='back'>
   <a href="{% url 'user_profile' %}">
       <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">

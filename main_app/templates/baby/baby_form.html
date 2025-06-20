@@ -6,8 +6,13 @@
 {% endblock %}
 
 {% block content %}
+<div class="edit-bar">
   <h2>Add a Baby</h2>
-  <form method="post" class="baby-form">
+  <a href="{% url 'user_profile'%}">
+    <img src="{% static 'images/back-arrow.jpg' %}" alt="Back" />
+  </a>
+</div>
+  <form method="post" enctype="multipart/form-data" class="baby-form">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit">Save Baby</button>
