@@ -25,7 +25,20 @@
         <div class="header-right">
           <div id="profileIcon" class="profile-container">
             <a href="/profile">
-              <img src="{% static 'images/profile.png' %}" alt="Profile Icon" />
+              {% if request.user.userprofile.profile_pic %}
+              <img
+                src="{{ request.user.userprofile.profile_pic.url }}"
+                alt="Profile Picture"
+                class="profile-pic"
+                id="icon"
+              />
+              {% else %}
+              <img
+                src="{% static 'images/default-profile.png' %}"
+                alt="Default Profile"
+                class="profile-pic"
+              />
+              {% endif %}
             </a>
           </div>
           <button id="menuToggle" class="hamburger-menu" onclick="toggleMenu()">
@@ -46,7 +59,7 @@
       </nav>
     </header>
     <main>{% block content %}{% endblock %}</main>
-     <script>
+    <script>
       // JavaScript to toggle the navigation menu
       function toggleMenu() {
         var navMenu = document.getElementById("nav-links");

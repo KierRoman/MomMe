@@ -51,6 +51,21 @@ a {
     
 }
 
+#icon {
+  border-radius: 20px;
+}
+
+.profile-pic {
+  margin-top: 10px;
+  width: 140px;
+  max-width: 140px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid rgb(56, 4, 119);
+  margin-bottom: .5em;
+}
+
 /* ---------- Hamburger Menu Button ---------- */
 .hamburger-menu {
   background: none;
