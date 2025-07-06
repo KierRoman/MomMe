@@ -8,7 +8,12 @@
 <div class="med-card">
   {% if baby %}
     <h2>{{ baby.name }}'s Feedings</h2>
+    <div class="edit-bar">
     <a class="add-btn" href="{% url 'add_feeding' baby.id %}">➕ Add Feeding</a>
+     <a onclick='history.back()'>
+    <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+  </a>
+</div>
 
     {% if feedings %}
       <table class="data-table">
@@ -27,7 +32,7 @@
             <tr>
               <td>{{ feeding.time|date:"Y-m-d H:i" }}</td>
               <td>{{ feeding.type }}</td>
-              <td>{% if feeding.amount_oz %}{{ feeding.amount_oz }}{% else %}-{% endif %}</td>
+              <td>{% if feeding.amount_oz %}{{ feeding.amount_oz }} oz{% else %}-{% endif %}</td>
               <td>
                 {% if feeding.type == "breast" and feeding.breast_used %}
                   {{ feeding.breast_used|title }}

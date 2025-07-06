@@ -65,7 +65,7 @@
       </div>
       <p>Born: {{ baby.birth_date }}</p>
       {% if baby.photo %}
-      <img src="{{ baby.photo.url }}" class="baby-photo" />
+      <img id='babypic' src="{{ baby.photo.url }}" class="baby-photo" />
       {% endif %}
     </div>
     {% empty %}

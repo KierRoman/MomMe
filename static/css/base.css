@@ -95,10 +95,10 @@ a {
   display: none; /* Hidden by default */
   margin-left: 80%;
   max-width: 500px;
-  background-color: #fff;
+  background-color:rgba(238, 100, 130, .90);
   width: 20%;
   position: absolute;
-  top: 6rem;
+  top: 6.7rem;
   z-index: 999;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   color: palevioletred; 
@@ -119,4 +119,10 @@ a {
 .nav-links ul li:hover {
   background-color: rgba(34, 24, 133, 0.204);
   transition: ease;
+}
+
+.nav-links li a {
+  text-decoration: none;
+  color:rgb(34, 14, 113);
+  font-weight: bold;
 }

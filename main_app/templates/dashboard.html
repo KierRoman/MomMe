@@ -10,7 +10,7 @@
 
   {% for baby in babies %}
     <div class="baby-summary">
-      <h3>{{ baby.name }}</h3>
+      <h3><a href="{% url 'baby_detail' baby.id%}">{{ baby.name }}</a></h3>
       <p id="birthdate"><strong>Date of Birth:</strong> <br> {{ baby.birth_date|date:"F j, Y" }}</p>
 
       <div class="baby-summary-field" id="feed-summary"

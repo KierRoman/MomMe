@@ -32,6 +32,14 @@ main {
   transform: scale(1.1);
 }
 
+#babypic {
+  transition: transform 0.8s ease;
+}
+
+#babypic:hover {
+  transform: scale(1.7);
+}
+
 .btn-submit {
   color:rgb(34, 14, 113);
   text-decoration: none;

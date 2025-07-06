@@ -9,7 +9,12 @@
 <div class="med-card">
   {% if baby %}
     <h2>{{ baby.name }}'s Diaper Changes</h2>
-    <a class="add-btn" href="{% url 'add_diaper' baby.id %}">➕ Add Diaper Change</a>
+    <div class="edit-bar">
+      <a class="add-btn" href="{% url 'add_diaper' baby.id %}">➕ Add Diaper Change</a>
+      <a onclick='history.back()'>
+      <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+        </a>
+    </div>
 
     {% if baby.diaper_set.exists %}
       <table class="data-table">

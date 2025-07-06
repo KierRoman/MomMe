@@ -37,7 +37,7 @@
 {% block content %}
 <div class="edit-bar">
   <h2>{% if form.instance.pk %}Edit{% else %}Add{% endif %} Feeding for {{ baby.name }}</h2>
-  <a href="{% url 'feedings' baby.id %}">
+  <a onclick='history.back()'>
     <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
   </a>
 </div>

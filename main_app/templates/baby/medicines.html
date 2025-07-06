@@ -11,7 +11,12 @@
 <div class="med-card">
   {% if baby %}
     <h2>{{ baby.name }}'s Medicines</h2>
-    <a class="add-btn" href="{% url 'add_medicine' baby.id %}">➕ Add Medicine</a>
+    <div class='edit-bar'>
+      <a class="add-btn" href="{% url 'add_medicine' baby.id %}">➕ Add Medicine</a>
+      <a onclick='history.back()'>
+      <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+        </a>
+    </div>
 
     {% if medicines %}
       <table class="data-table">
@@ -27,8 +32,8 @@
           {% for med in medicines %}
             <tr>
               <td>{{ med.time_given|date:"Y-m-d H:i" }}</td>
-              <td>{{ med.type }}</td>
-              <td>{% if med.dose_mg %}{{ med.dose_mg }} ml{% else %}-{% endif %}</td>
+              <td>{{ med.name }}</td>
+              <td>{% if med.dose_mg %}{{ med.dose_mg }} mg{% else %}-{% endif %}</td>
               <td>
                 <a href="{% url 'edit_medicine' med.id %}">✏️</a>
                 <form action="{% url 'delete_medicine' med.id %}" method="post" style="display:inline;">
@@ -48,16 +53,26 @@
     {% if babies %}
       {% for baby in babies %}
         <h2>{{ baby.name }}</h2>
-        <ul>
-          {% if baby.latest_medicine %}
-            <li>{{ baby.latest_medicine.time_given|date:"Y-m-d H:i" }} - {{ baby.latest_medicine.name }}</li>
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Latest Medicine</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+            {% if baby.latest_medicine %}
+            <td>{{ baby.latest_medicine.time_given|date:"Y-m-d H:i" }} - {{ baby.latest_medicine.name }}</td>
+            {% else %}
+            <td>No medicines yet.</td>
+            {% endif %}
+            <td><a href="{% url 'medicines' baby.id %}">🔍 View All medicines</a></td>
+            </tr>
+          </tbody>
+          </table>
+          {% endfor %}
           {% else %}
-            <li>No medicines yet.</li>
-          {% endif %}
-        </ul>
-        <a href="{% url 'medicines' baby.id %}">🔍 View All medicines</a>
-      {% endfor %}
-    {% else %}
       <p>No babies found.</p>
     {% endif %}
   {% endif %}

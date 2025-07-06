@@ -17,7 +17,7 @@
   <p><strong>Time:</strong> {{ appointment.time }}</p>
   <br>
   <div class='back'>
-  <a href="{% url 'appointments' %}">
+  <a onclick='history.back()'>
       <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
     </a>
   </div>

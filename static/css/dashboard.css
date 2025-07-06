@@ -34,6 +34,11 @@ h2 {
   font-family: 'Pacifico', cursive;
 }
 
+.baby-summary h3 a {
+  text-decoration: none;
+  color:rgb(34, 14, 113)
+}
+
 .baby-summary p {
   margin: 3.5rem 0;
   color:rgba(34, 14, 113);

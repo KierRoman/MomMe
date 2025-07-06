@@ -11,7 +11,7 @@
   <h2>
     {% if form.instance.pk %}Edit{% else %}Add{% endif %} Appointment for {{ baby.name }}
   </h2>
-  <a href="{% url 'appointments' baby.id %}">
+  <a onclick='history.back()'>
     <img src="{% static 'images/back-arrow.jpg' %}" alt="Back" />
   </a>
 </div>

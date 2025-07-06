@@ -5,7 +5,12 @@
 <div class="med-card">
   {% if baby %}
     <h2>{{ baby.name }}'s Appointments</h2>
-    <a class="add-btn" href="{% url 'add_appointment' baby.id %}">➕ Add Appointment</a>
+    <div class='edit-bar'>
+      <a class="add-btn" href="{% url 'add_appointment' baby.id %}">➕ Add Appointment</a>
+      <a onclick='history.back()'>
+      <img src="{% static 'images/back-arrow.jpg' %}" alt="Back">
+        </a>
+    </div>
 
     {% if appointments %}
       <table class="data-table">
@@ -64,7 +69,7 @@
               {% if baby.next_appointment %}
                 <td>
                   {{ baby.next_appointment.time|date:"Y-m-d H:i" }} —
-                  Dr. {{ baby.next_appointment.doctor_name }} at {{ baby.next_appointment.location }}
+                  w/ Dr. {{ baby.next_appointment.doctor_name }} 
                 </td>
               {% else %}
                 <td>No appointments yet.</td>
