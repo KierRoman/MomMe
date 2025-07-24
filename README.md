@@ -2,6 +2,11 @@
 
 ---
 
+![dashboard of MomMe app](static/images/dashboard.png)
+![feedings menu of MomMe app](static/images/testshot.png)
+
+
+
 ## 🌟 Features
 
 - 📊 **Dashboard** with an overview of recent activity per baby  
